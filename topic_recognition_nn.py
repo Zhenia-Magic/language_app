@@ -189,11 +189,6 @@ def print_evaluation_scores(y_val, predicted):
     precision_micro=average_precision_score(y_val,predicted,average='micro')
     precision_weighted=average_precision_score(y_val,predicted,average='weighted')
     print(accuracy)
-    print(f1_macro)
-    print(f1_micro)
-    print(precision_macro)
-    print(precision_micro)
-    print(precision_weighted)
 
 print('Bag-of-words')
 print_evaluation_scores(y_test, y_val_predicted_labels_mybag)

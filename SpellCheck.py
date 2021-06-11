@@ -3,6 +3,7 @@ from textblob import TextBlob
 import nltk
 from spellchecker import SpellChecker
 import jamspell
+import enchant
 
 from __init__ import annotated_text
 
@@ -74,7 +75,7 @@ def Spell_Check2(text):
     splitted_text = tokenize_input(text)
     misspelled = spell.unknown(splitted_text)
     d = {}
-    for word in misspelled:
+    for worкгd in misspelled:
         for i in range(len(splitted_text)):
             if splitted_text[i].lower() == word:
                 index = i+1
@@ -82,6 +83,24 @@ def Spell_Check2(text):
     p = percentage_of_incorrect((len(text.split())-len(misspelled),len(misspelled)))
     write_results(text, p, d)
 
+def spell_check_enchant(text):
+    glossary = enchant.Dict("en_US")
+    splitted_text = tokenize_input(text)
+    d = {}
+    misspelled = []
+    for word in splitted_text:
+        if glossary.check(word):
+            continue
+        else:
+            misspelled.append(word)
+    st.write(misspelled)
+    for word in misspelled:
+        for i in range(len(splitted_text)):
+            if splitted_text[i].lower() == word:
+                index = i + 1
+        d[word] = {'correct': glossary.suggest(word)[0:3], 'position': index}
+    p = percentage_of_incorrect((len(text.split()) - len(misspelled), len(misspelled)))
+    write_results(text, p, d)
 
 
 

@@ -2,6 +2,7 @@ import pickle
 import re
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
+import tensorflow as tf
 
 from nltk.corpus import stopwords
 
@@ -27,9 +28,7 @@ def predict_topic(text):
     tfidf_vectorizer = TfidfVectorizer(token_pattern='(\S+)', vocabulary=vocab)
     r = tfidf_vectorizer.fit_transform(text)
     prediction = topic_classifier.predict(r)
-    mlb = pickle.load( open( "binarizer.pkl", "rb" ) )
+    mlb = pickle.load(open("binarizer.pkl", "rb"))
     prediction = mlb.inverse_transform(prediction)
-    prediction = list(set([i[0] for i in prediction if len(i) > 0]))
+    prediction = list(set([i[0] for i in prediction if len(i) > 0]))[:3]
     return ', '.join(prediction)
-
-print(predict_topic("Education is an important tool which is very useful in everybody’s life. Education is what differentiates us from other living beings on earth. It makes man the smartest creature on earth. It empowers humans and gets them ready to face challenges of life efficiently. With that being said, education still remains a luxury and not a necessity in our country. Educational awareness needs to be spread through the country to make education accessible. But, this remains incomplete without first analyzing the importance of education. Only when the people realize what significance it holds, can they consider it a necessity for a good life. In this essay on Education, we will see the importance of education and how it is a doorway to success."))

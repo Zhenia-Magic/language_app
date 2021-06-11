@@ -11,4 +11,6 @@ regex==2020.11.13
 collection==0.1.6
 jamspell
 streamlit-lottie
-
+pyenchant
+language-tool-python
+gingerit

@@ -28,15 +28,15 @@ def predict_theme(text):
     print(theme_list)
 
 def prepare_text(text):
-    REPLACE_BY_SPACE_RE = re.compile( '[/(){}\[\]\|@,;]' )
-    BAD_SYMBOLS_RE = re.compile( '[^0-9a-z #+_]' )
-    STOPWORDS = set(stopwords.words( 'english' ) )
+    REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
+    BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
+    STOPWORDS = set(stopwords.words('english'))
 
     text = text.lower()  # lowercase text
     text = text.replace( "\n", " " )
     text = REPLACE_BY_SPACE_RE.sub( ' ', text )  # replace REPLACE_BY_SPACE_RE symbols by space in text
     text = BAD_SYMBOLS_RE.sub( '', text )  # delete symbols which are in BAD_SYMBOLS_RE from text
-    text = ' '.join( [word for word in text.split() if word not in STOPWORDS] )  # delete stopwors from text
+    text = ' '.join([word for word in text.split() if word not in STOPWORDS])  # delete stopwors from text
     text = text.strip()
     return text
 

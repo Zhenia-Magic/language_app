@@ -1,4 +1,3 @@
-import pickle
 import re
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -8,10 +7,11 @@ from nltk.corpus import stopwords
 # nltk.download('stopwords')
 #file = open("topic_recognition_model.pkl", "rb")
 from sklearn.multiclass import OneVsRestClassifier
+import fickling
 
-topic_classifier: OneVsRestClassifier = pickle.load(open("topic_recognition_model.pkl", "rb"))
+topic_classifier: OneVsRestClassifier = fickling.load(open("topic_recognition_model.pkl", "rb"))
 #file.close()
-vocab = pickle.load(open("topics_vocabulary.pkl", "rb"))
+vocab = fickling.load(open("topics_vocabulary.pkl", "rb"))
 
 def predict_topic(text):
     REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
